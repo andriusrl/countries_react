@@ -37,15 +37,15 @@ function App() {
       setCountries(res.data.countries);
     })
 
-    
+
   }
 
-  function showCountries () {
+  function showCountries() {
     console.log(countries)
     return (
       <div>
         {
-          countries.map(countrie=>{
+          countries.map(countrie => {
             return (
               <Countrie
                 key={countrie.emoji}
@@ -62,28 +62,32 @@ function App() {
     )
   }
 
-  function order(){
+  function order(order) {
+    console.log("Testando order")
+    console.log(order)
     let copyCountries = [...countries]
     copyCountries = copyCountries.sort((countrie1, countrie2) => {
-        if (countrie1.name[0] > countrie2.name[0]) {
+      // console.log(countrie1?.[order][0])
+      
+      if ((countrie1?.[order] != null) && (countrie2?.[order] != null)) {
+        if (countrie1?.[order][0] > countrie2?.[order][0]) {
           return 1;
         }
-        else if (countrie1.name[0] < countrie2.name[0]) {
+        else if (countrie1?.[order][0] < countrie2?.[order][0]) {
           return -1;
         }
-        return 0;
-      })
-      setCountries(copyCountries)
+      }
+      return 0;
+    })
+    setCountries(copyCountries)
   }
 
   return (
     <Main>
       <div>
-        Ordenar por 
-        <button onClick={order}>Nome</button>
-        <button>Capital</button>
-        <button>Bandeira</button>
-        <button>Moeda</button>
+        Ordenar por
+        <button onClick={() => { order("name") }}> Nome do pais </button>
+        <button onClick={() => { order("capital") }}> Capital </button>
       </div>
       {countries ? showCountries() : <div>CARREGANDO!</div>}
     </Main>
