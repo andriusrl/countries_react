@@ -1,7 +1,8 @@
-import { useEffect } from "react";
-import { client } from "./config/client-graphql"
-import { gql } from '@apollo/client'
+import { useEffect, useState } from "react";
+import { client } from "./config/client-graphql";
+import { gql } from '@apollo/client';
 import Styled from 'styled-components';
+import Countrie from './components/Countrie';
 
 const Main = Styled.div`
   text-align: center;
@@ -9,29 +10,80 @@ const Main = Styled.div`
 `
 
 function App() {
+  const [countries, setCountries] = useState(undefined)
 
   useEffect(() => {
-    initial()
+    getCountries()
   }, [])
 
-  console.log("testando")
-
-  function initial() {
+  function getCountries() {
     client.query({
       query: gql`
       query{
         countries{
-          code
-          name
-  }
-}
+            name
+            capital
+            emoji
+            languages{
+              name
+              native
+            }
+            currency
+          }
+      }
       `
-    }).then(res => console.log(res))
+    }).then(res => {
+      setCountries(res.data.countries);
+    })
+
+    
+  }
+
+  function showCountries () {
+    return (
+      <div>
+        {
+          countries.map(countrie=>{
+            return (
+              <Countrie
+                key={countrie.emoji}
+                name={countrie.name}
+                capital={countrie.capital}
+                emoji={countrie.emoji}
+                languages={countrie.languages}
+                currency={countrie.currency}
+              />
+            )
+          })
+        }
+      </div>
+    )
+  }
+
+  function order(){
+    let copy = [...countries]
+     copy = copy.sort((countrie1, countrie2) => {
+        if (countrie1.name[0] > countrie2.name[0]) {
+          return 1;
+        }
+        else if (countrie1.name[0] < countrie2.name[0]) {
+          return -1;
+        }
+        return 0;
+      })
+      setCountries(copy)
   }
 
   return (
     <Main>
-      HELLO WORLD
+      <div>
+        Ordenar
+        <button onClick={order}>Nome</button>
+        <button>Capital</button>
+        <button>Bandeira</button>
+        <button>moeda</button>
+      </div>
+      {countries ? showCountries() : <div>CARREGANDO!</div>}
     </Main>
   );
 }
