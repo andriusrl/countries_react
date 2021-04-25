@@ -6,7 +6,8 @@ import Countrie from './components/Countrie';
 
 const Main = Styled.div`
   text-align: center;
-  font-size: 42px;
+  /* font-size: 42px; */
+
 `
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
   }
 
   function showCountries () {
+    console.log(countries)
     return (
       <div>
         {
@@ -61,8 +63,8 @@ function App() {
   }
 
   function order(){
-    let copy = [...countries]
-     copy = copy.sort((countrie1, countrie2) => {
+    let copyCountries = [...countries]
+    copyCountries = copyCountries.sort((countrie1, countrie2) => {
         if (countrie1.name[0] > countrie2.name[0]) {
           return 1;
         }
@@ -71,17 +73,17 @@ function App() {
         }
         return 0;
       })
-      setCountries(copy)
+      setCountries(copyCountries)
   }
 
   return (
     <Main>
       <div>
-        Ordenar
+        Ordenar por 
         <button onClick={order}>Nome</button>
         <button>Capital</button>
         <button>Bandeira</button>
-        <button>moeda</button>
+        <button>Moeda</button>
       </div>
       {countries ? showCountries() : <div>CARREGANDO!</div>}
     </Main>
