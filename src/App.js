@@ -1,17 +1,17 @@
 import { Fragment, useEffect, useState } from "react";
 import { client } from "./config/client-graphql";
 import { gql } from '@apollo/client';
-import Styled from 'styled-components';
+import styled from 'styled-components';
 import Countrie from './components/Countrie';
 
-const Main = Styled.div`
+const Main = styled.div`
   text-align: center;
   padding-top: 10px;
   font-size: 16px;
   font-weight: 900;
   background-color: #C4CBF2;
 `
-const Button = Styled.button`
+const Button = styled.button`
   height: 39px;
   margin: 0 3px 0 3px;
   font-size: 14px;
@@ -30,28 +30,25 @@ function App() {
   function getCountries() {
     client.query({
       query: gql`
-      query{
-        countries{
-            name
-            capital
-            emoji
-            languages{
+        query{
+          countries{
               name
-              native
+              capital
+              emoji
+              languages{
+                name
+                native
+              }
+              currency
             }
-            currency
-          }
-      }
+        }
       `
     }).then(res => {
       setCountries(res.data.countries);
     })
-
-
   }
 
   function showCountries() {
-    console.log(countries)
     return (
       <Fragment>
         {
@@ -97,6 +94,7 @@ function App() {
         <Button onClick={() => { order("capital") }}> Capital </Button>
       </div>
       {countries ? showCountries() : <div>CARREGANDO!</div>}
+      
     </Main>
   );
 }
