@@ -74,6 +74,7 @@ export const CurrencyWrapper = styled.div`
         margin: 0 0 3% 0;
         font-size: 16px;
         font-weight: 900;
+        color: black;
     }
 `
 export const LanguageWrapper = styled.div`

@@ -22,11 +22,11 @@ export default function Countrie(props) {
                 </NameWrapper>
                 <SubItemWrapper>
                     <CapitalWrapper>
-                        <p>capital</p>
+                        <p>Capital</p>
                         <p>{props.capital}</p>
                     </CapitalWrapper>
                     <CurrencyWrapper>
-                        <p>moeda(s)</p>
+                        <p>Moeda(s)</p>
                         <Fragment>{
                          props?.currency?.map(currency => {
                              return (
