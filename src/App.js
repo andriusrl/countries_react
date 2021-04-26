@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { client } from "./config/client-graphql";
 import { gql } from '@apollo/client';
 import Styled from 'styled-components';
@@ -6,8 +6,18 @@ import Countrie from './components/Countrie';
 
 const Main = Styled.div`
   text-align: center;
-  /* font-size: 42px; */
-
+  padding-top: 10px;
+  font-size: 16px;
+  font-weight: 900;
+  background-color: #C4CBF2;
+`
+const Button = Styled.button`
+  height: 39px;
+  margin: 0 3px 0 3px;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: #0E6BBD;
+  border-radius: 10px;
 `
 
 function App() {
@@ -43,7 +53,7 @@ function App() {
   function showCountries() {
     console.log(countries)
     return (
-      <div>
+      <Fragment>
         {
           countries.map(countrie => {
             return (
@@ -58,17 +68,13 @@ function App() {
             )
           })
         }
-      </div>
+      </Fragment>
     )
   }
 
   function order(order) {
-    console.log("Testando order")
-    console.log(order)
     let copyCountries = [...countries]
     copyCountries = copyCountries.sort((countrie1, countrie2) => {
-      // console.log(countrie1?.[order][0])
-      
       if ((countrie1?.[order] != null) && (countrie2?.[order] != null)) {
         if (countrie1?.[order][0] > countrie2?.[order][0]) {
           return 1;
@@ -86,8 +92,9 @@ function App() {
     <Main>
       <div>
         Ordenar por
-        <button onClick={() => { order("name") }}> Nome do pais </button>
-        <button onClick={() => { order("capital") }}> Capital </button>
+        <Button onClick={() => { order("name") }}> Nome do pais </Button>
+        ou
+        <Button onClick={() => { order("capital") }}> Capital </Button>
       </div>
       {countries ? showCountries() : <div>CARREGANDO!</div>}
     </Main>
