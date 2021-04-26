@@ -94,17 +94,21 @@ function App() {
     }
   }
 
-  function showNumPages() {
-    return(
-      <NumPages>
-        {pageMin + 2}
-        {" "}
+  function showPages() {
+    return (
+      <Fragment>
+        <button onClick={previusPage}>Página anterior</button>
+        <NumPages>
+          {pageMin + 2}
+          {" "}
         ~
         {" "}
-        {pageMax < countries?.length ? pageMax : countries?.length}
-      </NumPages>
-  )
-}
+          {pageMax < countries?.length ? pageMax : countries?.length}
+        </NumPages>
+        <button onClick={nextPage}>Próxima página</button>
+      </Fragment>
+    )
+  }
 
   return (
     <Main>
@@ -115,15 +119,11 @@ function App() {
         <Button onClick={() => { order("capital") }}> Capital </Button>
       </OrderWrapper>
       <Pages>
-        <button onClick={previusPage}>Página anterior</button>
-        {showNumPages()}
-        <button onClick={nextPage}>Próxima página</button>
+        {showPages()}
       </Pages>
       {countries ? showCountries(pageMin, pageMax) : <Loading>CARREGANDO...</Loading>}
       <Pages>
-        <button onClick={previusPage}>Página anterior</button>
-        {showNumPages()}
-        <button onClick={nextPage}>Próxima página</button>
+        {showPages()}
       </Pages>
     </Main>
   );
