@@ -97,7 +97,7 @@ function App() {
   function showPages() {
     return (
       <Fragment>
-        <button onClick={previusPage}>Página anterior</button>
+          <button onClick={previusPage}>Página anterior</button>
         <NumPages>
           {pageMin + 2}
           {" "}

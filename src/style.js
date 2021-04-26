@@ -24,6 +24,7 @@ export const Button = styled.button`
   background-color: #C4CBF2;
   border-radius: 10px;
   border-color: grey;
+  cursor: pointer;
 `
 export const Pages = styled.div`
   display: flex;
@@ -39,7 +40,7 @@ export const Pages = styled.div`
     margin: 0;
     background-color: #ADB8EB;
     font-weight: bold;
-    /* color: #333333; */
+    cursor: pointer;
   }
   button:nth-of-type(1){
     border-bottom-left-radius: 50px;
