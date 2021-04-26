@@ -1,27 +1,20 @@
 import { Fragment, useEffect, useState } from "react";
 import { client } from "./config/client-graphql";
-import { gql } from '@apollo/client';
-import styled from 'styled-components';
-import Countrie from './components/Countrie';
-
-const Main = styled.div`
-  text-align: center;
-  padding-top: 10px;
-  font-size: 16px;
-  font-weight: 900;
-  background-color: #C4CBF2;
-`
-const Button = styled.button`
-  height: 39px;
-  margin: 0 3px 0 3px;
-  font-size: 14px;
-  font-weight: 600;
-  background-color: #0E6BBD;
-  border-radius: 10px;
-`
+import { gql } from "@apollo/client";
+import Countrie from "./components/Countrie";
+import {
+  Main,
+  OrderWrapper,
+  Button,
+  Pages,
+  NumPages,
+  Loading
+} from "./style"
 
 function App() {
   const [countries, setCountries] = useState(undefined)
+  const [pageMin, setPageMin] = useState(-1)
+  const [pageMax, setPageMax] = useState(20)
 
   useEffect(() => {
     getCountries()
@@ -48,21 +41,28 @@ function App() {
     })
   }
 
-  function showCountries() {
+  function showCountries(min, max) {
     return (
       <Fragment>
         {
-          countries.map(countrie => {
-            return (
-              <Countrie
-                key={countrie.emoji}
-                name={countrie.name}
-                capital={countrie.capital}
-                emoji={countrie.emoji}
-                languages={countrie.languages}
-                currency={countrie.currency}
-              />
-            )
+          countries.map((countrie, index) => {
+            // console.log(countrie.currency?.length)
+            // if (countrie.currency?.length > 3){
+
+            // }
+            // console.log(countrie.currency?.split(/\s*,\s*/))
+            if ((index > min) && (index < max)) {
+              return (
+                <Countrie
+                  key={countrie.emoji}
+                  name={countrie.name}
+                  capital={countrie.capital}
+                  emoji={countrie.emoji}
+                  languages={countrie.languages}
+                  currency={countrie.currency?.split(/\s*,\s*/)}
+                />
+              )
+            }
           })
         }
       </Fragment>
@@ -85,16 +85,51 @@ function App() {
     setCountries(copyCountries)
   }
 
+  function previusPage() {
+    if (pageMin >= 19) {
+      setPageMin(pageMin - 20)
+      setPageMax(pageMax - 20)
+    }
+  }
+
+  function nextPage() {
+    if (pageMax < countries.length) {
+      setPageMin(pageMin + 20)
+      setPageMax(pageMax + 20)
+    }
+  }
+
+  function showNumPages() {
+    return(
+      <NumPages>
+        {pageMin + 2}
+        {" "}
+        ~
+        {" "}
+        {pageMax < countries?.length ? pageMax : countries?.length}
+      </NumPages>
+  )
+}
+
   return (
     <Main>
-      <div>
+      <OrderWrapper>
         Ordenar por
         <Button onClick={() => { order("name") }}> Nome do pais </Button>
         ou
         <Button onClick={() => { order("capital") }}> Capital </Button>
-      </div>
-      {countries ? showCountries() : <div>CARREGANDO!</div>}
-      
+      </OrderWrapper>
+      <Pages>
+        <button onClick={previusPage}>Página anterior</button>
+        {showNumPages()}
+        <button onClick={nextPage}>Próxima página</button>
+      </Pages>
+      {countries ? showCountries(pageMin, pageMax) : <Loading>CARREGANDO...</Loading>}
+      <Pages>
+        <button onClick={previusPage}>Página anterior</button>
+        {showNumPages()}
+        <button onClick={nextPage}>Próxima página</button>
+      </Pages>
     </Main>
   );
 }
