@@ -6,6 +6,15 @@ export const CountrieWrapper = styled.div`
     margin: 3%;
     display: flex;
     background-color: #ABB6ED;
+    @media (min-width: 768px) {
+        margin: 1% 16% 1% 16%;
+    };
+    @media (min-width: 1020px) {
+        margin: 1% 26% 1% 26%;
+    };
+    @media (min-width: 1200px) {
+        margin: 1% 33% 1% 33%;
+    };
 `
 export const EmojiWrapper = styled.div`
     display: flex;
@@ -72,7 +81,7 @@ export const LanguageWrapper = styled.div`
     width: 60%;
     p:nth-of-type(1){
         padding: 0;
-        margin: 0 0 3% 0;
+        margin: 0 0 1% 0;
         font-size: 16px;
         font-weight: 900;
         color: black;

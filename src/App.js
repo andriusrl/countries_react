@@ -46,11 +46,6 @@ function App() {
       <Fragment>
         {
           countries.map((countrie, index) => {
-            // console.log(countrie.currency?.length)
-            // if (countrie.currency?.length > 3){
-
-            // }
-            // console.log(countrie.currency?.split(/\s*,\s*/))
             if ((index > min) && (index < max)) {
               return (
                 <Countrie

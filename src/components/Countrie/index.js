@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import {
     CountrieWrapper,
     EmojiWrapper,
@@ -26,15 +27,15 @@ export default function Countrie(props) {
                     </CapitalWrapper>
                     <CurrencyWrapper>
                         <p>moeda(s)</p>
-                        <p>{
+                        <Fragment>{
                          props?.currency?.map(currency => {
                              return (
-                                 <div key={currency}>
+                                 <p key={currency}>
                                     {currency}
-                                 </div>
+                                 </p>
                              )
                          })
-                        }</p>
+                        }</Fragment>
                     </CurrencyWrapper>
                     <LanguageWrapper>
                         <p>Idioma(s)</p>

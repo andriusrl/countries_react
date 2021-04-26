@@ -12,6 +12,9 @@ export const OrderWrapper = styled.div`
   padding-bottom: 7px;
   margin-bottom: 3%;
   background-color: #ABB5ED;
+  @media (min-width: 768px) {
+      margin-bottom: 1%;
+    };
 `
 export const Button = styled.button`
   height: 39px;
@@ -25,7 +28,11 @@ export const Button = styled.button`
 export const Pages = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 1% 3% 0 1%;
+  margin: 1% 1% 0 1%;
+  @media (min-width: 768px) {
+    margin: 1% 3% 0 3%;
+    justify-content: space-evenly;
+  }
   button {
     border: 1px solid black;
     padding: 8px;
@@ -38,12 +45,17 @@ export const Pages = styled.div`
     border-bottom-left-radius: 50px;
     border-top-left-radius: 50px;
     border-color: #333333;
-
+    @media (min-width: 768px) {
+      margin: 0 1% 0 auto;
+    }
   }
   button:nth-of-type(2){
     border-bottom-right-radius: 50px;
     border-top-right-radius: 50px;
     border-color: #333333;
+    @media (min-width: 768px) {
+      margin: 0 auto 0 1%;
+    }
   }
 `
 export const NumPages = styled.div`
