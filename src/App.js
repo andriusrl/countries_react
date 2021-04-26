@@ -22,6 +22,8 @@ const Button = styled.button`
 
 function App() {
   const [countries, setCountries] = useState(undefined)
+  const [pageMin, setPageMin] = useState(0)
+  const [pageMax, setPageMax] = useState(20)
 
   useEffect(() => {
     getCountries()
@@ -48,21 +50,23 @@ function App() {
     })
   }
 
-  function showCountries() {
+  function showCountries(min, max) {
     return (
       <Fragment>
         {
-          countries.map(countrie => {
-            return (
-              <Countrie
-                key={countrie.emoji}
-                name={countrie.name}
-                capital={countrie.capital}
-                emoji={countrie.emoji}
-                languages={countrie.languages}
-                currency={countrie.currency}
-              />
-            )
+          countries.map((countrie, index) => {
+            if ((index >= min) && (index <=max)){
+              return (
+                <Countrie
+                  key={countrie.emoji}
+                  name={countrie.name}
+                  capital={countrie.capital}
+                  emoji={countrie.emoji}
+                  languages={countrie.languages}
+                  currency={countrie.currency}
+                />
+              )
+            }
           })
         }
       </Fragment>
@@ -85,6 +89,20 @@ function App() {
     setCountries(copyCountries)
   }
 
+  function previusPage() {
+    if (pageMin>=30){
+      setPageMin(pageMin-30)
+      setPageMax(pageMax-30)
+    }
+  }
+
+  function nextPage() {
+    if (pageMax < countries.length){
+      setPageMin(pageMin+30)
+      setPageMax(pageMax+30)
+    }
+  }
+
   return (
     <Main>
       <div>
@@ -93,8 +111,11 @@ function App() {
         ou
         <Button onClick={() => { order("capital") }}> Capital </Button>
       </div>
-      {countries ? showCountries() : <div>CARREGANDO!</div>}
-      
+      <p onClick={previusPage}>Página anterior</p>
+      <p onClick={nextPage}>Próxima página</p>
+      {countries ? showCountries(pageMin, pageMax) : <div>CARREGANDO!</div>}
+      {/* <p>Página anterior</p>
+      <p onClick={nextPage}>Próxima página</p> */}
     </Main>
   );
 }
