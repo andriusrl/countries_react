@@ -41,9 +41,9 @@ export default function Countrie(props) {
                         {
                             props?.languages?.map(language => {
                                 return (
-                                    <div key={language.name}>
+                                    <p key={language.name}>
                                         {language.name}
-                                    </div>
+                                    </p>
                                 )
                             })
                         }

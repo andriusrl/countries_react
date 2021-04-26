@@ -43,11 +43,13 @@ export const CapitalWrapper = styled.div`
         padding: 0;
         margin: 0 0 3% 0;
         font-size: 16px;
+        font-weight: 900;
     }
     p:nth-of-type(2){
         padding: 0;
         margin:0;
         font-size: 12px;
+        color: #333333;
     }
 `
 export const CurrencyWrapper = styled.div`
@@ -57,23 +59,29 @@ export const CurrencyWrapper = styled.div`
         padding: 0;
         margin: 0 0 3% 0;
         font-size: 16px;
+        font-weight: 900;
     }
     p:nth-of-type(2){
         padding: 0;
         margin: 0;
         font-size: 12px;
+        color: #333333;
     }
 `
 export const LanguageWrapper = styled.div`
     width: 60%;
     p:nth-of-type(1){
         padding: 0;
+        margin: 0 0 3% 0;
         font-size: 16px;
-        font-weight: 600;
+        font-weight: 900;
+        color: black;
     }
     p {
         margin: 0;
         padding: 0;
         font-size: 12px;
+        font-weight: 600;
+        color: #333333;
     }
 `

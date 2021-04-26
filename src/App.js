@@ -7,7 +7,8 @@ import {
   OrderWrapper,
   Button,
   Pages,
-  NumPages
+  NumPages,
+  Loading
 } from "./style"
 
 function App() {
@@ -101,12 +102,12 @@ function App() {
   function showNumPages() {
     return(
       <NumPages>
-          {pageMin + 2}
-          {" "}
-          ~
-          {" "}
-          {pageMax < countries?.length ? pageMax : countries?.length}
-        </NumPages>
+        {pageMin + 2}
+        {" "}
+        ~
+        {" "}
+        {pageMax < countries?.length ? pageMax : countries?.length}
+      </NumPages>
   )
 }
 
@@ -119,15 +120,15 @@ function App() {
         <Button onClick={() => { order("capital") }}> Capital </Button>
       </OrderWrapper>
       <Pages>
-        <p onClick={previusPage}>Página anterior</p>
+        <button onClick={previusPage}>Página anterior</button>
         {showNumPages()}
-        <p onClick={nextPage}>Próxima página</p>
+        <button onClick={nextPage}>Próxima página</button>
       </Pages>
-      {countries ? showCountries(pageMin, pageMax) : <div>CARREGANDO!</div>}
+      {countries ? showCountries(pageMin, pageMax) : <Loading>CARREGANDO...</Loading>}
       <Pages>
-        <p onClick={previusPage}>Página anterior</p>
+        <button onClick={previusPage}>Página anterior</button>
         {showNumPages()}
-        <p onClick={nextPage}>Próxima página</p>
+        <button onClick={nextPage}>Próxima página</button>
       </Pages>
     </Main>
   );
