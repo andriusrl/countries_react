@@ -1,16 +1,19 @@
 import styled from "styled-components"
 
 const CountrieWrapper = styled.div`
-    border: 1px solid black;
+    border: 1px solid grey;
+    border-radius: 5px;
     margin: 3%;
     display: flex;
+    /* background-color: #5AABF2; */
+    background-color: #ABB6ED;
 `
 const EmojiWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    border-right: 1px solid black;
-    width: 18%;
+    border-right: 1px solid grey;
+    width: 23%;
     p {
         margin: 0;
         padding: 0;
@@ -22,7 +25,7 @@ const ItemWrapper = styled.div`
     width: 100%;
 `
 const NameWrapper = styled.div`
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid grey;
      p {
         margin: 0;
         padding: 0;
@@ -34,7 +37,7 @@ const SubItemWrapper = styled.div`
     display: flex;
 `
 const CapitalWrapper = styled.div`
-    border-right: 1px solid black;
+    border-right: 1px solid grey;
     width: 30%;
 
     p:nth-of-type(1){
@@ -50,7 +53,7 @@ const CapitalWrapper = styled.div`
     }
 `
 const CurrencyWrapper = styled.div`
-    border-right: 1px solid black;
+    border-right: 1px solid grey;
     width: 28%;
     p:nth-of-type(1){
         padding: 0;
@@ -79,7 +82,6 @@ const LanguageWrapper = styled.div`
 `
 
 export default function Countrie(props) {
-    // console.log(props.languages)
     return (
         <CountrieWrapper>
             <EmojiWrapper>
@@ -101,7 +103,7 @@ export default function Countrie(props) {
                     <LanguageWrapper>
                         <p>Idioma(s)</p>
                         {
-                            props.languages.map(language => {
+                            props?.languages?.map(language => {
                                 return (
                                     <div key={language.name}>
                                         {language.name}
