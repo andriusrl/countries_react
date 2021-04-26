@@ -19,10 +19,32 @@ const Button = styled.button`
   background-color: #0E6BBD;
   border-radius: 10px;
 `
+const Pages = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin: 1% 3% 0 1%;
+  p {
+    border: 1px solid black;
+    padding: 8px;
+    margin: 0;
+  }
+  p:nth-of-type(1){
+    border-bottom-left-radius: 50px;
+    border-top-left-radius: 50px;
+  }
+  p:nth-of-type(2){
+    border-bottom-right-radius: 50px;
+    border-top-right-radius: 50px;
+  }
+`
+const NumPages = styled.div`
+  display: flex;
+  align-items: center;
+`
 
 function App() {
   const [countries, setCountries] = useState(undefined)
-  const [pageMin, setPageMin] = useState(0)
+  const [pageMin, setPageMin] = useState(-1)
   const [pageMax, setPageMax] = useState(20)
 
   useEffect(() => {
@@ -51,11 +73,14 @@ function App() {
   }
 
   function showCountries(min, max) {
+    console.log(countries)
+    console.log("min:" + min)
+    console.log("max:" + max)
     return (
       <Fragment>
         {
           countries.map((countrie, index) => {
-            if ((index >= min) && (index <=max)){
+            if ((index > min) && (index < max)) {
               return (
                 <Countrie
                   key={countrie.emoji}
@@ -90,18 +115,30 @@ function App() {
   }
 
   function previusPage() {
-    if (pageMin>=30){
-      setPageMin(pageMin-30)
-      setPageMax(pageMax-30)
+    if (pageMin >= 19) {
+      setPageMin(pageMin - 20)
+      setPageMax(pageMax - 20)
     }
   }
 
   function nextPage() {
-    if (pageMax < countries.length){
-      setPageMin(pageMin+30)
-      setPageMax(pageMax+30)
+    if (pageMax < countries.length) {
+      setPageMin(pageMin + 20)
+      setPageMax(pageMax + 20)
     }
   }
+
+  function showNumPages() {
+    return(
+      <NumPages>
+          {pageMin + 2}
+          {" "}
+          ~
+          {" "}
+          {pageMax < countries?.length ? pageMax : countries?.length}
+        </NumPages>
+  )
+}
 
   return (
     <Main>
@@ -111,11 +148,17 @@ function App() {
         ou
         <Button onClick={() => { order("capital") }}> Capital </Button>
       </div>
-      <p onClick={previusPage}>Página anterior</p>
-      <p onClick={nextPage}>Próxima página</p>
+      <Pages>
+        <p onClick={previusPage}>Página anterior</p>
+        {showNumPages()}
+        <p onClick={nextPage}>Próxima página</p>
+      </Pages>
       {countries ? showCountries(pageMin, pageMax) : <div>CARREGANDO!</div>}
-      {/* <p>Página anterior</p>
-      <p onClick={nextPage}>Próxima página</p> */}
+      <Pages>
+        <p onClick={previusPage}>Página anterior</p>
+        {showNumPages()}
+        <p onClick={nextPage}>Próxima página</p>
+      </Pages>
     </Main>
   );
 }
