@@ -47,7 +47,6 @@ export const SubItemWrapper = styled.div`
 export const CapitalWrapper = styled.div`
     border-right: 1px solid grey;
     width: 40%;
-
     p:nth-of-type(1){
         padding: 0;
         margin: 0 0 3% 0;
@@ -64,17 +63,17 @@ export const CapitalWrapper = styled.div`
 export const CurrencyWrapper = styled.div`
     border-right: 1px solid grey;
     width: 36%;
+    p{
+        padding: 0;
+        margin: 0;
+        font-size: 12px;
+        color: #333333;
+    }
     p:nth-of-type(1){
         padding: 0;
         margin: 0 0 3% 0;
         font-size: 16px;
         font-weight: 900;
-    }
-    p:nth-of-type(2){
-        padding: 0;
-        margin: 0;
-        font-size: 12px;
-        color: #333333;
     }
 `
 export const LanguageWrapper = styled.div`
