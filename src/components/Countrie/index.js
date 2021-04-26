@@ -25,8 +25,16 @@ export default function Countrie(props) {
                         <p>{props.capital}</p>
                     </CapitalWrapper>
                     <CurrencyWrapper>
-                        <p>moeda</p>
-                        <p>{props.currency}</p>
+                        <p>moeda(s)</p>
+                        <p>{
+                         props?.currency?.map(currency => {
+                             return (
+                                 <div key={currency}>
+                                    {currency}
+                                 </div>
+                             )
+                         })
+                        }</p>
                     </CurrencyWrapper>
                     <LanguageWrapper>
                         <p>Idioma(s)</p>

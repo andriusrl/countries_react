@@ -1,46 +1,14 @@
 import { Fragment, useEffect, useState } from "react";
 import { client } from "./config/client-graphql";
-import { gql } from '@apollo/client';
-import styled from 'styled-components';
-import Countrie from './components/Countrie';
-
-const Main = styled.div`
-  text-align: center;
-  padding-top: 10px;
-  font-size: 16px;
-  font-weight: 900;
-  background-color: #C4CBF2;
-`
-const Button = styled.button`
-  height: 39px;
-  margin: 0 3px 0 3px;
-  font-size: 14px;
-  font-weight: 600;
-  background-color: #0E6BBD;
-  border-radius: 10px;
-`
-const Pages = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin: 1% 3% 0 1%;
-  p {
-    border: 1px solid black;
-    padding: 8px;
-    margin: 0;
-  }
-  p:nth-of-type(1){
-    border-bottom-left-radius: 50px;
-    border-top-left-radius: 50px;
-  }
-  p:nth-of-type(2){
-    border-bottom-right-radius: 50px;
-    border-top-right-radius: 50px;
-  }
-`
-const NumPages = styled.div`
-  display: flex;
-  align-items: center;
-`
+import { gql } from "@apollo/client";
+import Countrie from "./components/Countrie";
+import {
+  Main,
+  OrderWrapper,
+  Button,
+  Pages,
+  NumPages
+} from "./style"
 
 function App() {
   const [countries, setCountries] = useState(undefined)
@@ -73,13 +41,15 @@ function App() {
   }
 
   function showCountries(min, max) {
-    console.log(countries)
-    console.log("min:" + min)
-    console.log("max:" + max)
     return (
       <Fragment>
         {
           countries.map((countrie, index) => {
+            // console.log(countrie.currency?.length)
+            // if (countrie.currency?.length > 3){
+
+            // }
+            // console.log(countrie.currency?.split(/\s*,\s*/))
             if ((index > min) && (index < max)) {
               return (
                 <Countrie
@@ -88,7 +58,7 @@ function App() {
                   capital={countrie.capital}
                   emoji={countrie.emoji}
                   languages={countrie.languages}
-                  currency={countrie.currency}
+                  currency={countrie.currency?.split(/\s*,\s*/)}
                 />
               )
             }
@@ -142,12 +112,12 @@ function App() {
 
   return (
     <Main>
-      <div>
+      <OrderWrapper>
         Ordenar por
         <Button onClick={() => { order("name") }}> Nome do pais </Button>
         ou
         <Button onClick={() => { order("capital") }}> Capital </Button>
-      </div>
+      </OrderWrapper>
       <Pages>
         <p onClick={previusPage}>Página anterior</p>
         {showNumPages()}

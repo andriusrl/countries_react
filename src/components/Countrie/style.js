@@ -37,7 +37,7 @@ export const SubItemWrapper = styled.div`
 `
 export const CapitalWrapper = styled.div`
     border-right: 1px solid grey;
-    width: 30%;
+    width: 40%;
 
     p:nth-of-type(1){
         padding: 0;
@@ -52,7 +52,7 @@ export const CapitalWrapper = styled.div`
 `
 export const CurrencyWrapper = styled.div`
     border-right: 1px solid grey;
-    width: 28%;
+    width: 36%;
     p:nth-of-type(1){
         padding: 0;
         margin: 0 0 3% 0;
